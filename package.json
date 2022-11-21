@@ -1,5 +1,5 @@
 {
-  "name": "react-ace",
+  "name": "@shortloop/react-ace",
   "version": "10.1.0",
   "description": "A react component for Ace Editor",
   "main": "lib/index.js",
