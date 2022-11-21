@@ -71,6 +71,8 @@ export interface IAceEditorProps {
   commands?: ICommand[];
   annotations?: Ace.Annotation[];
   markers?: IMarker[];
+  /** Highlight the string if found in the document **/
+  highlight?: string;
 }
 
 export default class ReactAce extends React.Component<IAceEditorProps> {
@@ -125,7 +127,8 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
     ]),
     navigateToFileEnd: PropTypes.bool,
     commands: PropTypes.array,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    highlight: PropTypes.string
   };
   public static defaultProps: Partial<IAceEditorProps> = {
     name: "ace-editor",
@@ -200,7 +203,8 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
       commands,
       annotations,
       markers,
-      placeholder
+      placeholder,
+      highlight
     } = this.props;
 
     this.editor = ace.edit(this.refEditor);
@@ -233,8 +237,7 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
       .setMode(
         typeof mode === "string" ? `ace/mode/${mode}` : (mode as Ace.SyntaxMode)
       );
-    if(theme && theme !== "")
-      this.editor.setTheme(`ace/theme/${theme}`);
+    if (theme && theme !== "") this.editor.setTheme(`ace/theme/${theme}`);
     this.editor.setFontSize(
       typeof fontSize === "number" ? `${fontSize}px` : fontSize
     );
@@ -317,6 +320,11 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
     if (focus) {
       this.editor.focus();
     }
+
+    if (highlight) {
+      const range = this.editor.find(highlight);
+      this.editor.selection.addRange(range);
+    }
   }
 
   public componentDidUpdate(prevProps: IAceEditorProps) {
@@ -344,7 +352,8 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
     }
 
     // First process editor value, as it may create a new session (see issue #300)
-    const valueChanged = this.editor &&
+    const valueChanged =
+      this.editor &&
       nextProps.value != null &&
       this.editor.getValue() !== nextProps.value;
 
