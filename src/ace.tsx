@@ -339,6 +339,11 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
       }
     }
 
+    if (nextProps.highlight !== oldProps.highlight) {
+      const range = this.editor.find(nextProps.highlight);
+      this.editor.selection.addRange(range);
+    }
+
     if (nextProps.className !== oldProps.className) {
       const appliedClasses = this.refEditor.className;
       const appliedClassesArray = appliedClasses.trim().split(" ");
