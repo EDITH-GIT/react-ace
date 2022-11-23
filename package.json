@@ -1,6 +1,6 @@
 {
-  "name": "@pc-beast/react-ace",
-  "version": "10.1.1",
+  "name": "@shortloop/react-ace",
+  "version": "10.1.2",
   "description": "A react component for Ace Editor",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -22,7 +22,7 @@
     "coverage": "nyc npm run test",
     "prepare": "npm run build:lib"
   },
-  "author": "James Hrisho",
+  "author": "Pavnesh Chaturvedi",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.15.7",
