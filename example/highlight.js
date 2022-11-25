@@ -15,8 +15,6 @@ const App = () => {
         onChange={e => setHighlight(e.target.value)}
       />
       <AceEditor
-        mode="javascript"
-        theme="monokai"
         name="blah2"
         fontSize={14}
         showPrintMargin={true}
@@ -26,9 +24,6 @@ const App = () => {
     console.log("i've loaded");
 }`}
         setOptions={{
-          enableBasicAutocompletion: false,
-          enableLiveAutocompletion: false,
-          enableSnippets: false,
           showLineNumbers: true,
           tabSize: 4
         }}
