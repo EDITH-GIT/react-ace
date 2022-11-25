@@ -328,7 +328,7 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
     if (highlight) {
       const range = this.editor.find(highlight);
       this.editor.selection.addRange(range);
-      range.start<range.end ? setFoundHighlight(true) : setFoundHighlight(false);
+      (range && range.start<range.end) ? setFoundHighlight(true) : setFoundHighlight(false);
     }
   }
 
@@ -347,7 +347,7 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
     if (nextProps.highlight !== oldProps.highlight) {
       const range = this.editor.find(nextProps.highlight);
       this.editor.selection.addRange(range);
-      range.start<range.end ? nextProps.setFoundHighlight(true) : nextProps.setFoundHighlight(false);
+      (range && range.start<range.end) ? nextProps.setFoundHighlight(true) : nextProps.setFoundHighlight(false);
     }
 
     if (nextProps.className !== oldProps.className) {
