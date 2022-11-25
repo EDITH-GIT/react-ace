@@ -73,6 +73,8 @@ export interface IAceEditorProps {
   markers?: IMarker[];
   /** Highlight the string if found in the document **/
   highlight?: string;
+  /** Sets the highlight state to true if found */
+  setFoundHighlight?: (found: boolean) => void;
 }
 
 export default class ReactAce extends React.Component<IAceEditorProps> {
@@ -128,7 +130,8 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
     navigateToFileEnd: PropTypes.bool,
     commands: PropTypes.array,
     placeholder: PropTypes.string,
-    highlight: PropTypes.string
+    highlight: PropTypes.string,
+    setFoundHighlight: PropTypes.func
   };
   public static defaultProps: Partial<IAceEditorProps> = {
     name: "ace-editor",
@@ -204,7 +207,8 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
       annotations,
       markers,
       placeholder,
-      highlight
+      highlight,
+      setFoundHighlight,
     } = this.props;
 
     this.editor = ace.edit(this.refEditor);
@@ -324,6 +328,7 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
     if (highlight) {
       const range = this.editor.find(highlight);
       this.editor.selection.addRange(range);
+      range.start<range.end ? setFoundHighlight(true) : setFoundHighlight(false);
     }
   }
 
@@ -342,6 +347,7 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
     if (nextProps.highlight !== oldProps.highlight) {
       const range = this.editor.find(nextProps.highlight);
       this.editor.selection.addRange(range);
+      range.start<range.end ? nextProps.setFoundHighlight(true) : nextProps.setFoundHighlight(false);
     }
 
     if (nextProps.className !== oldProps.className) {
