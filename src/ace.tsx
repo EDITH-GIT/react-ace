@@ -74,7 +74,7 @@ export interface IAceEditorProps {
   /** Highlight the string if found in the document **/
   highlight?: string;
   /** Sets the highlight state to true if found */
-  setFoundHighlight?: (found: boolean) => void;
+  setFoundHighlight?: any;
 }
 
 export default class ReactAce extends React.Component<IAceEditorProps> {
@@ -131,7 +131,7 @@ export default class ReactAce extends React.Component<IAceEditorProps> {
     commands: PropTypes.array,
     placeholder: PropTypes.string,
     highlight: PropTypes.string,
-    setFoundHighlight: PropTypes.func
+    setFoundHighlight: PropTypes.any
   };
   public static defaultProps: Partial<IAceEditorProps> = {
     name: "ace-editor",
