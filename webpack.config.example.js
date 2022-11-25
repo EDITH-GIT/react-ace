@@ -7,7 +7,8 @@ module.exports = {
   entry: {
     index: "./example/index",
     split: "./example/split",
-    diff: "./example/diff"
+    diff: "./example/diff",
+    highlight: "./example/highlight"
   },
   output: {
     path: path.join(__dirname, "example/static"),
